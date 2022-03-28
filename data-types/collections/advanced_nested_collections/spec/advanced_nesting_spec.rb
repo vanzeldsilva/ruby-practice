@@ -52,114 +52,134 @@ RSpec.describe 'Advanced Nested Collections' do
     expect(store_names).to eq(expected)
   end
 
+  it 'test 6' do
+      # Find dishes names for Olive Garden
+      dishes_names = []
+      dishes_names.push(stores[:olive_garden][:dishes][0][:name])
+      dishes_names.push(stores[:olive_garden][:dishes][1][:name])
+      dishes_names.flatten!
+      expect(dishes_names).to eq(['Risotto', 'Steak'])
+    end
 
-  xit 'test 6' do
-    # Find dishes names for Olive Garden
-    dishes_names = ____
+    it 'test 7' do
+      # Return a list of employees across
+      # all restaurants
+      employees = []
+      employees.push(stores[:olive_garden][:employees])
+      employees.push(stores[:dennys][:employees])
+      employees.push(stores[:macdonalds][:employees])
+      employees.flatten!
 
-    expect(dishes_names).to eq(['Risotto', 'Steak'])
-  end
+      expected = ["Jeff", "Zach", "Samantha", "Bob", "Sue", "James", "Alvin", "Simon", "Theodore"]
+      expect(employees).to eq(expected)
+    end
 
-  xit 'test 7' do
-    # Return a list of employees across
-    # all restaurants
-    employee_names = ____
+    it 'test 8' do
+      # Return a list of all ingredients
+      # across all restaurants
+      ingredients = []
+      ingredients.push(stores[:olive_garden][:dishes][0][:ingredients])
+      ingredients.push(stores[:olive_garden][:dishes][1][:ingredients])
+      ingredients.push(stores[:dennys][:dishes][0][:ingredients])
+      ingredients.push(stores[:dennys][:dishes][1][:ingredients])
+      ingredients.push(stores[:macdonalds][:dishes][0][:ingredients])
+      ingredients.push(stores[:macdonalds][:dishes][1][:ingredients])
+      ingredients.flatten!
 
-    expected = ["Jeff", "Zach", "Samantha", "Bob", "Sue", "James", "Alvin", "Simon", "Theodore"]
-    expect(employee_names).to eq(expected)
-  end
+      expected = [
+        "Rice",
+        "Cheese",
+        "Butter",
+        "Beef",
+        "Garlic",
+        "Flour",
+        "Eggs",
+        "Milk",
+        "Syrup",
+        "Flour",
+        "Eggs",
+        "Syrup",
+        "Bun",
+        "Hamburger",
+        "Ketchup",
+        "pickles",
+        "Potatoes",
+        "Salt"
+      ]
+      expect(ingredients).to eq(expected)
+    end
 
-  xit 'test 8' do
-    # Return a list of all ingredients
-    # across all restaurants
-    ingredients = ____
+    it 'test 9' do
+      # Return the full menu price for Olive Garden
+      full_menu_price = stores[:olive_garden][:dishes][0][:price] + stores[:olive_garden][:dishes][1][:price]
 
-    expected = [
-      "Rice",
-      "Cheese",
-      "Butter",
-      "Beef",
-      "Garlic",
-      "Flour",
-      "Eggs",
-      "Milk",
-      "Syrup",
-      "Flour",
-      "Eggs",
-      "Syrup",
-      "Bun",
-      "Hamburger",
-      "Ketchup",
-      "pickles",
-      "Potatoes",
-      "Salt"
-    ]
-    expect(ingredients).to eq(expected)
-  end
+      expect(full_menu_price).to eq(27)
+    end
 
-  xit 'test 9' do
-    # Return the full menu price for Olive Garden
-    full_menu_price = ____
+    it 'test 10' do
+      # Return the full menu for Olive Garden
 
-    expect(full_menu_price).to eq(27)
-  end
+      olive_garden_menu = {}
+      olive_garden_menu[stores[:olive_garden][:dishes][0][:name]] = stores[:olive_garden][:dishes][0]
+      olive_garden_menu[stores[:olive_garden][:dishes][1][:name]] = stores[:olive_garden][:dishes][1]
 
-  xit 'test 10' do
-    # Return the full menu for Olive Garden
-
-    olive_garden_menu = _____
-
-    expected = {
-      "Risotto" => {
-        :name => "Risotto",
-        :ingredients => ["Rice", "Cheese", "Butter"],
-        :price => 12
-      },
-      "Steak" => {
-        :name => "Steak",
-        :ingredients => ["Beef", "Garlic"],
-        :price => 15
+      expected = {
+        "Risotto" => {
+          :name => "Risotto",
+          :ingredients => ["Rice", "Cheese", "Butter"],
+          :price => 12
+        },
+        "Steak" => {
+          :name => "Steak",
+          :ingredients => ["Beef", "Garlic"],
+          :price => 15
+        }
       }
-    }
-    expect(olive_garden_menu).to eq(expected)
-  end
+      expect(olive_garden_menu).to eq(expected)
+    end
 
-  xit 'test 11' do
-    # Return a full menu across all restaurants
-    full_menu = ____
+    it 'test 11' do
+      # Return a full menu across all restaurants
+      full_menu = {}
+      full_menu[stores[:olive_garden][:dishes][0][:name]] = stores[:olive_garden][:dishes][0]
+      full_menu[stores[:olive_garden][:dishes][1][:name]] = stores[:olive_garden][:dishes][1]
+      full_menu[stores[:dennys][:dishes][0][:name]] = stores[:dennys][:dishes][0]
+      full_menu[stores[:dennys][:dishes][1][:name]] = stores[:dennys][:dishes][1]
+      full_menu[stores[:macdonalds][:dishes][0][:name]] = stores[:macdonalds][:dishes][0]
+      full_menu[stores[:macdonalds][:dishes][1][:name]] = stores[:macdonalds][:dishes][1]
 
-    expected = {
-      "Risotto" => {
-        :name => "Risotto",
-        :ingredients => ["Rice", "Cheese", "Butter"],
-        :price => 12
-      },
-      "Steak" => {
-        :name => "Steak",
-        :ingredients => ["Beef", "Garlic"],
-        :price => 15
-      },
-      "Pancakes" => {
-        :name => "Pancakes",
-        :ingredients => ["Flour", "Eggs", "Milk", "Syrup"],
-        :price => 10
-      },
-      "Waffles" => {
-        :name => "Waffles",
-        :ingredients => ["Flour", "Eggs", "Syrup"],
-        :price => 7
-      },
-      "Big Mac" => {
-        :name => "Big Mac",
-        :ingredients => ["Bun", "Hamburger", "Ketchup", "pickles"],
-        :price => 5
-      },
-      "Fries" => {
-        :name => "Fries",
-        :ingredients => ["Potatoes", "Salt"],
-        :price => 2
+      expected = {
+        "Risotto" => {
+          :name => "Risotto",
+          :ingredients => ["Rice", "Cheese", "Butter"],
+          :price => 12
+        },
+        "Steak" => {
+          :name => "Steak",
+          :ingredients => ["Beef", "Garlic"],
+          :price => 15
+        },
+        "Pancakes" => {
+          :name => "Pancakes",
+          :ingredients => ["Flour", "Eggs", "Milk", "Syrup"],
+          :price => 10
+        },
+        "Waffles" => {
+          :name => "Waffles",
+          :ingredients => ["Flour", "Eggs", "Syrup"],
+          :price => 7
+        },
+        "Big Mac" => {
+          :name => "Big Mac",
+          :ingredients => ["Bun", "Hamburger", "Ketchup", "pickles"],
+          :price => 5
+        },
+        "Fries" => {
+          :name => "Fries",
+          :ingredients => ["Potatoes", "Salt"],
+          :price => 2
+        }
       }
-    }
-    expect(full_menu).to eq(expected)
+      expect(full_menu).to eq(expected)
+    end
   end
-end
